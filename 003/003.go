@@ -15,7 +15,6 @@ func main (){
 	primes := sieve()
 	for {
 		factor = <- primes
-
 //		fmt.Printf("new factor=%v\n",factor)		
 		for{
 			if foo % factor == 0{
@@ -24,11 +23,8 @@ func main (){
 			}else {
 				break
 			}
-		}
-		
+		}	
 	}
-
-	
 	fmt.Printf("result: %v\n",factor)
 }
 
