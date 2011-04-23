@@ -1,46 +1,29 @@
-#Solution to project euler Problem 15 in python
-# learning python graph libraries starting with networkx
-# Yes, pen and paper would work, but i wanna learn python ;-)
-# easy install networkx
+'''
+Created on 20.04.2011
 
-#The 20x20 grid is modeled as an graph. 21 edges per line
-
-import networkx as nx
-
-targetNode = 21*21
-foundRoutes = 0
-def buildGraph():
-	G=nx.Graph()
-
-	for x in range (0,21*21):
-		if (x % 21):
-			G.add_edge(x ,x+1)
-		if (x>0 and x <= 420):
-			G.add_edge( x, x+21)
-			
-	G.add_edge(0,1)
-	G.add_edge(0,22)
-	return G
-	
-
-G=buildGraph()
+Solution to http://projecteuler.net/index.php?section=problems&id=15
+@author: meatz
+'''
 
 
-
-def run (currentNode, backtrack, numSteps):
-	global foundRoutes
-	backtrack.append(currentNode)
-	numSteps+=1
-#	print currentNode, numSteps, len(backtrack)
-	if (currentNode == targetNode):
-		foundRoutes+=1
-		print "found a route"
-		return
-	for x in G.neighbors(currentNode):
-		if (not backtrack.__contains__(x)):
-			run(x,backtrack,numSteps)
-	backtrack.remove(currentNode)
-	return
-
-backtrack = []
-run(0,backtrack,0)
+def dump(matrix):
+    for row in matrix:
+        print row
+        
+            
+if __name__ == '__main__':
+    
+    size=21
+    matrix = [[0 for col in range(size)] for row in range(size)]
+    
+    for i in range(1,size):
+        matrix[0][i]=1
+        matrix[i][0]=1
+        
+    for y in range(1,size):
+        for x in range(1,size):
+            matrix[x][y]= matrix[x-1][y] + matrix[x][y-1]
+    
+    dump(matrix)
+    
+    print matrix[size-1][size-1]
